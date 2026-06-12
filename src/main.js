@@ -85,6 +85,14 @@ if (canvas) {
     });
 }
 
+/* ---------- Ambient video respects reduced motion ---------- */
+if (reduced) {
+  document.querySelectorAll('video[autoplay]').forEach((v) => {
+    v.removeAttribute('autoplay');
+    v.pause();
+  });
+}
+
 /* ---------- Cursor + motion ---------- */
 createCursor();
 initMarquee();

@@ -63,22 +63,34 @@ export function runIntro() {
   }
 
   const counter = { v: 0 };
-  const ready = Promise.all([
+  // Fonts: never let a stalled font request hold the site hostage
+  const fontsReady = Promise.race([
     document.fonts ? document.fonts.ready : Promise.resolve(),
-    new Promise((res) => {
-      gsap.to(counter, {
-        v: 100,
-        duration: 1.35,
-        ease: 'power2.inOut',
-        onUpdate: () => {
-          if (countEl) countEl.textContent = Math.round(counter.v);
-        },
-        onComplete: res,
-      });
-    }),
+    new Promise((res) => setTimeout(res, 2500)),
   ]);
+  const counterDone = new Promise((res) => {
+    gsap.to(counter, {
+      v: 100,
+      duration: 1.35,
+      ease: 'power2.inOut',
+      onUpdate: () => {
+        if (countEl) countEl.textContent = Math.round(counter.v);
+      },
+      onComplete: res,
+    });
+  });
 
-  ready.then(finish);
+  // Absolute failsafe: if rAF is throttled (background tab) or anything
+  // else stalls, unblock the page after 5s — finish() runs exactly once.
+  let finished = false;
+  const finishOnce = () => {
+    if (finished) return;
+    finished = true;
+    if (countEl) countEl.textContent = '100';
+    finish();
+  };
+  Promise.all([fontsReady, counterDone]).then(finishOnce);
+  setTimeout(finishOnce, 5000);
 }
 
 /* ------------------------------------------------------------
@@ -199,15 +211,16 @@ export function initScrollAnimations() {
     });
   });
 
-  /* Work cards */
+  /* Work cards — opacity (not autoAlpha): visibility:hidden would block
+     Chrome from lazy-loading the card images on deep links */
   gsap.utils.toArray('[data-project]').forEach((card, idx) => {
     gsap.from(card, {
-      autoAlpha: 0,
+      opacity: 0,
       y: 60,
       duration: 1.05,
       ease: 'power3.out',
       delay: (idx % 2) * 0.12,
-      scrollTrigger: { trigger: card, start: 'top 88%' },
+      scrollTrigger: { trigger: card, start: 'top 92%' },
     });
   });
 
