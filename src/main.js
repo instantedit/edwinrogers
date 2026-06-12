@@ -2,7 +2,6 @@
  * Edwin Rogers — Attention, Engineered.
  * Entry point: smooth scroll, WebGL hero, cursor, motion system.
  */
-import './styles/main.css';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
