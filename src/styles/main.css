@@ -7,7 +7,8 @@
   --bg: #060608;
   --bg-2: #0b0b10;
   --ink: #f2f1ec;
-  --muted: #8b8b94;
+  --muted: #a3a3ad;
+  --body: #c7c7cf;
   --accent: #c9ff3b;
   --accent-dim: rgba(201, 255, 59, 0.12);
   --line: rgba(242, 241, 236, 0.09);
@@ -559,7 +560,7 @@ button {
 
 .hero__sub {
   max-width: 46ch;
-  color: var(--muted);
+  color: var(--body);
   font-size: clamp(1rem, 1.35vw, 1.2rem);
 }
 
@@ -768,7 +769,7 @@ button {
 }
 
 .service__desc {
-  color: var(--muted);
+  color: var(--body);
   font-size: 0.98rem;
   max-width: 44ch;
 }
@@ -840,7 +841,7 @@ button {
 }
 
 .syscard__desc {
-  color: var(--muted);
+  color: var(--body);
   max-width: 34ch;
   margin-bottom: 1.6rem;
 }
@@ -1008,7 +1009,7 @@ button {
 }
 
 .project__desc {
-  color: var(--muted);
+  color: var(--body);
   margin-top: 0.5rem;
   max-width: 46ch;
 }
@@ -1071,7 +1072,7 @@ button {
 }
 
 .about__text {
-  color: var(--muted);
+  color: var(--body);
   font-size: clamp(1.05rem, 1.4vw, 1.25rem);
   max-width: 56ch;
   margin-bottom: 1.4rem;
@@ -1134,7 +1135,7 @@ button {
 }
 
 .cta__sub {
-  color: var(--muted);
+  color: var(--body);
   max-width: 52ch;
   margin: 0 auto 3rem;
   font-size: clamp(1rem, 1.4vw, 1.2rem);
